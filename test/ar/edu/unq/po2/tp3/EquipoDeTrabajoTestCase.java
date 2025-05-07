@@ -21,6 +21,7 @@ public class EquipoDeTrabajoTestCase {
     }
     
 
+    
     @Test
     public void testPromedioEdadConVariosIntegrantes() {
         EquipoDeTrabajo equipo = new EquipoDeTrabajo("Equipo Test");
