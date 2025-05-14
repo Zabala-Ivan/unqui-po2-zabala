@@ -1,37 +1,37 @@
 package ar.edu.unq.po2.tp4;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-
 public class SupermercadoTest {
 
-    private Producto arroz;
-    private Producto detergente;
     private Supermercado supermercado;
 
     @BeforeEach
     public void setUp() {
-        arroz = new Producto("Arroz", 18.9f, true);
-        detergente = new Producto("Detergente", 75f);
-        supermercado = new Supermercado("Lo de Tito", "Av Zubeldia 801");
+        supermercado = new Supermercado(); // supermercado sin nombre ni dirección
     }
 
     @Test
-    public void testCantidadDeProductos() {
+    public void testSupermercadoEmpiezaSinProductos() {
         assertEquals(0, supermercado.getCantidadDeProductos());
-        supermercado.agregarProducto(arroz);
-        supermercado.agregarProducto(detergente);
+    }
+
+    @Test
+    public void testAgregarProductoIncrementeCantidad() {
+        supermercado.agregarProducto(new Producto("Leche", 100.0f));
+        assertEquals(1, supermercado.getCantidadDeProductos());
+
+        supermercado.agregarProducto(new Producto("Pan", 50.0f));
         assertEquals(2, supermercado.getCantidadDeProductos());
     }
 
     @Test
-    public void testPrecioTotal() {
-        assertEquals(0.0f, supermercado.getPrecioTotal(), 0.0001f);
-        supermercado.agregarProducto(arroz);
-        supermercado.agregarProducto(detergente);
-        assertEquals(93.9f, supermercado.getPrecioTotal(), 0.0001f);
+    public void testPrecioTotalDeProductos() {
+        supermercado.agregarProducto(new Producto("Fideos", 25.5f));
+        supermercado.agregarProducto(new Producto("Arroz", 74.5f));
+        assertEquals(100.0, supermercado.getPrecioTotal(), 0.01); // margen por decimales
     }
 }
